@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { StudentService } from '../services/student.service';
 import { Student } from '../student';
 import { Observable, Subject } from "rxjs";
@@ -12,6 +12,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class StudentListComponent implements OnInit {
 
+  @Input() role: string;
+  blRole: boolean;
   constructor(private studentservice: StudentService) { }
 
   studentsArray: any[] = [];
@@ -27,6 +29,12 @@ export class StudentListComponent implements OnInit {
 
 
   ngOnInit() {
+
+    if (this.role == 'ROLE_USER') {
+      this.blRole = false;
+    } else {
+      this.blRole = true;
+    }
     this.isupdated = false;
     this.dtOptions = {
       pageLength: 6,

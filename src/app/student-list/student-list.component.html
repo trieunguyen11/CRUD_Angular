@@ -30,10 +30,10 @@
                     <td>{{student.student_name}}</td>
                     <td>{{student.student_email}}</td>
                     <td>{{student.student_branch}}</td>
-                    <td><button (click)="deleteStudent(student.student_id)" class='btn btn-primary'><i
+                    <td><button *ngIf="blRole" (click)="deleteStudent(student.student_id)" class='btn btn-primary'><i
                                 class="fa fa-futboll-0">Delete</i></button>&nbsp;
-                        <button (click)="updateStudent(student.student_id)" class='btn btn-info' data-toggle="modal"
-                            data-target="#myModal">Update</button>
+                        <button *ngIf="blRole" (click)="updateStudent(student.student_id)" class='btn btn-info'
+                            data-toggle="modal" data-target="#myModal">Update</button>
                     </td>
                 </tr>
             </tbody><br>
