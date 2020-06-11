@@ -1,0 +1,24 @@
+<div *ngIf="info.token;else loggedOut">
+    <h5 class="text-primary">Your Infomation</h5>
+    <p>
+        <strong>Username:</strong>{{info.username}}<br />
+        <strong>Roles:</strong>{{info.authorities}}<br />
+        <strong>Token:</strong>{{info.token}}
+    </p>
+    <div>
+        <button class="btn btn-primary" routerLink="add-student">Add Student</button>
+    </div>
+    <app-student-list></app-student-list>
+    <button class="btn btn-secondary" (click)="logout()">Logout</button>
+    <br>
+    <button class="btn btn-secondary" (click)="backClicked()">Back</button>
+</div>
+<ng-template #loggedOut>
+    Please login.
+</ng-template>
+<!-- <ng-template> là một đối tượng template trong Angular có thể sử dụng các directives 
+    (*ngIf, *ngFor, [ngSwitch] và custom directive ). -->
+<!-- ng-template chỉ hoạt động khi được chỉ định với directive điều khiển hiển thị. -->
+<!-- C1: <ng-template [ngIf]="home">Go home</ng-template>
+    C2: <ng-template *ngIf="home then gohome"></ng-template>
+        <ng-template #goHome>Go home!</ng-template>  -->

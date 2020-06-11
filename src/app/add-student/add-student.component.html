@@ -1,0 +1,69 @@
+<h3>Create student</h3>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div [hidden]="submitted" style="width: 400px;">
+      <!-- AbstractControl là một abstract class cho 3 lớp con form control: FormControl, FormGroup, và FormArray.
+       Nó cung cấp các hành vi, thuộc tính chung cho các lớp con. -->
+      <!-- FormControl là đơn vị nhỏ nhất, nó lưu giữ giá trị và trạng thái hợp lệ của một form control. 
+       Tương ứng với một HTML form control như input, select. -->
+      <!-- FormGroup nó lưu giữ giá trị và trạng thái hợp lệ của một nhóm các đối tượng thuộc AbstractControl – có thể là FormControl, FormGroup, 
+       hay FormArray – đây là một dạng composite. Ở level cao nhất của một form trong component của bạn là một FormGroup.
+
+FormArray nó lưu giữ giá trị và trạng thái hợp lệ của một mảng các đối tượng thuộc AbstractControl 
+giống như FormGroup. Nó cũng là một dạng composite. Nhưng nó không phải là thành phần ở level cao nhất. -->
+      <form [formGroup]="studentsaveform" #savestudent (ngSubmit)="saveStudent(saveStudent)">
+        <div class="form-group">
+          <label for="name">Student name</label>
+          <!-- property formControlName  -->
+          <input type="text" class="form-control" formControlName="student_name" data-toggle="tooltip"
+            data-placement="right" title="Enter Student Name">
+          <div class="alert alert-danger" *ngIf="(StudentName.touched) && (StudentName.invalid)"
+            style="margin-top: 5px;">
+            <!-- Để hiển thị thông báo cho người dùng biết về lỗi, chúng ta có thể sử dụng phương pháp như
+             đã đề cập trong phần Template-driven form. -->
+            <span *ngIf="StudentName.errors.required">Student Name is Required</span>
+            <span *ngIf="StudentName.errors.minlength">MinLength Error</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Student email</label>
+          <input type="email" class="form-control" formControlName="student_email" data-toggle="tooltip"
+            data-placement="right" title="Enter Student Email">
+          <div class="alert alert-danger" *ngIf="(StudentEmail.touched) && (StudentEmail.invalid)"
+            style="margin-top: 5px;">
+            <span *ngIf="StudentEmail.errors.required">Student Email is Required</span>
+            <span *ngIf="StudentEmail.errors.email">Invalid Email Format</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="branch">Student Branch</label>
+          <select class="form-control" formControlName="student_branch" data-toggle="tooltip" data-placement="right"
+            title="Select Student Branch">
+            <option value="null">--Select Branch--</option>
+            <option value="B-Tech">B-Tech</option>
+            <option value="BCA">BCA</option>
+            <option value="MCA">MCA</option>
+            <option value="M-Tech">M-Tech</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-2">
+    <div [hidden]="!submitted">
+      <h4>Student Added SuccessFully!</h4>
+      <button (click)="addStudentForm()" class="btn btn-primary">Add more Student</button>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <button (click)="backClicked()" class="btn btn-primary">Back</button>
+  </div>
+  <div class="col-sm-4"></div>
+</div>

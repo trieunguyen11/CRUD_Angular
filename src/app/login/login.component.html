@@ -1,0 +1,61 @@
+<div *ngIf="isLoggedIn; else loggedOut">
+    Logged in as {{roles}}
+</div>
+<ng-template #loggedOut>
+    <div class="row col-sm-6" style="max-width: 350px;">
+        <!-- nếu dùng submit thì sẽ reload lại form -->
+        <!-- nếu dùng ngSubmit thì sẽ ko reload -->
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <!-- chúng ta đã tạo một template variable là f, nó sẽ là một instance của directive ngForm -->
+            <!-- do đó ta có thể sử dụng các public API mà directive này cung cấp như lấy ra value của nó  -->
+            <!-- chẳng hạn như f.value -->
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel"
+                    required />
+                <!-- Binding dữ liệu là một tính năng của các framework hiện đại, đồng bộ hóa dữ liệu hiển thị trong giao diện và model. -->
+                <!-- Nếu không có binding, một developer sẽ phải viết code liên tục đồng bộ hóa các view và model như với Jquery -->
+                <!-- ngmodel: nói cho Angular biết các form control nào cần phải quản lý, gán data cho các control-->
+                <!-- phải khai báo attribute name, nếu không ngModel sẽ báo lỗi -->
+                <!-- [(ngModel)]: là 1 directive để áp dụng two-way binding, nó sẽ thực hiện đồng bộ dữ liệu từ Component vs view(DOM) và ngược lại.
+                DOM là viết tắt của chữ Document Object Model, dịch tạm ra là mô hình các đối tượng
+                trong tài liệu HTML , XML
+                Component là một lớp nó thường hiểu như là controller tương tác giao diện người dùng.
+                          - Một component thường có 3 thành phần chính là code TypeScript, template HTML và CSS. -->
+                <!-- Để tạo được Custom Two-way Data Binding, chúng ta kết hợp @Input (property binding) và @Output (event binding) với cú pháp:
+                            Tên của input là xyz thì tên của output là xyzChange. -->
+                <!-- [ngModel]: one-way binding : nó chỉ bind dũ liệu tù component sang view hoặc từ view sang component-->
+                <!-- đổ dữ liệu từ component sang view -->
+                <!-- <tag [thuoctinh]="datamember"></tag> -->
+                <!-- vd: <input type="text" [value]="user.name">: thẻ input có thuộc tính value -->
+                <!-- thuộc tính trong dấu ngoặc vuông sẽ được gán vói thuộc tính "datamember" trong component -->
+
+                <div *ngIf="f.submitted && username.invalid">
+                    <div *ngIf="username.errors.required">Username is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" [(ngModel)]="form.password"
+                    #password="ngModel" required minlength="6" />
+                <div *ngIf="f.submitted && password.invalid">
+                    <div *ngIf="password.errors.required">Password is required</div>
+                    <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">Login</button>
+                <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+                    Login failed: {{errorMessage}}
+                    <!-- {{xxx}} : xxx là biến khai báo trong file .ts, khi đặt trong 2 dấu ngoặc nhọn nó sẽ 
+                                                        bind dữ liệu từ file .ts để hiển thị trên view -->
+                </div>
+
+            </div>
+        </form>
+        <hr />
+        <p>Don't have an account?</p>
+        <a href="signup" class="btn btn-success">Sign Up</a>
+    </div>
+
+</ng-template>
