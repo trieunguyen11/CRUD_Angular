@@ -14,6 +14,7 @@ import { PartnerlistComponent } from './partnerlist/partnerlist.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { DemoComponent } from './demo/demo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { NgModule } from '@angular/core';
     AdminComponent,
     StudentListComponent,
     PartnerlistComponent,
-    AddStudentComponent
+    AddStudentComponent,
+    DemoComponent
   ],
   imports: [
     BrowserModule,
